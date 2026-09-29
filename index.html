@@ -7,88 +7,352 @@
   <title>One Last Thing...</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
-      background: #140914;
+      background:
+        radial-gradient(circle at center, #32152f 0%, #180b17 55%, #090509 100%);
       color: white;
       font-family: Georgia, "Times New Roman", serif;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .screen {
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
+      padding: 30px 20px;
     }
 
-    .container {
-      padding: 30px;
+    .ready-content {
+      animation: fadeIn 2s ease;
     }
 
-    h1 {
-      font-size: 2.5rem;
+    .whisper {
+      font-size: 0.9rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      opacity: 0.55;
       margin-bottom: 35px;
     }
 
-    button {
+    .ready-button {
       background: transparent;
       color: white;
-      border: 1px solid white;
-      border-radius: 40px;
-      padding: 18px 40px;
-      font-size: 1.1rem;
-      letter-spacing: 3px;
+      border: 1px solid rgba(255,255,255,0.75);
+      border-radius: 50px;
+      padding: 20px 55px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      letter-spacing: 6px;
       cursor: pointer;
+      transition: all 0.4s ease;
     }
 
-    button:active {
-      transform: scale(0.97);
+    .ready-button:active {
+      transform: scale(0.95);
     }
 
-    #status {
+    .reveal {
+      display: none;
+      max-width: 700px;
+      width: 100%;
+      padding: 50px 20px 70px;
+      margin: 0 auto;
+    }
+
+    .reveal.show {
+      display: block;
+      animation: revealIn 2s ease;
+    }
+
+    .intro {
+      font-size: 0.9rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 10vw, 4.8rem);
+      line-height: 1;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    .two {
+      font-size: clamp(1.7rem, 7vw, 2.8rem);
+      color: #f2c6df;
+      margin: 20px 0 55px;
+      font-weight: normal;
+    }
+
+    .event {
+      border-top: 1px solid rgba(255,255,255,0.25);
+      padding: 35px 10px;
+    }
+
+    .day {
+      font-size: 0.95rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-bottom: 12px;
+    }
+
+    .date {
+      font-size: 1.15rem;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+
+    .time {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .location {
+      font-size: 1.25rem;
+      margin-bottom: 18px;
+    }
+
+    .event-name {
+      font-style: italic;
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+
+    .roam-button {
+      display: inline-block;
       margin-top: 25px;
+      padding: 14px 25px;
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 35px;
+      color: white;
+      text-decoration: none;
       font-family: Arial, sans-serif;
       font-size: 0.85rem;
-      opacity: 0.65;
+      letter-spacing: 2px;
+      transition: background 0.3s ease;
+    }
+
+    .roam-button:active {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .closing {
+      border-top: 1px solid rgba(255,255,255,0.25);
+      margin-top: 15px;
+      padding-top: 40px;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .heart {
+      font-size: 2rem;
+      margin: 25px 0;
+    }
+
+    .music-note {
+      position: fixed;
+      bottom: 18px;
+      left: 0;
+      right: 0;
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      opacity: 0.35;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes revealIn {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <!-- THE INITIAL SCREEN -->
 
-    <h1>One Last Thing...</h1>
+  <div class="screen" id="readyScreen">
 
-    <button id="playButton">▶ PLAY</button>
+    <div class="ready-content">
 
-    <div id="status">Press play when you're ready.</div>
+      <div class="whisper">
+        One last thing...
+      </div>
+
+      <button class="ready-button" id="readyButton">
+        READY?
+      </button>
+
+    </div>
 
   </div>
+
+
+  <!-- THE REVEAL -->
+
+  <div class="reveal" id="reveal">
+
+    <div class="intro">
+      You have a date.
+    </div>
+
+    <h1>YOU HAVE A DATE.</h1>
+
+    <div class="two">
+      Actually... you have TWO. ❤️
+    </div>
+
+
+    <!-- FRIDAY -->
+
+    <div class="event">
+
+      <div class="day">
+        Friday
+      </div>
+
+      <div class="date">
+        October 23rd
+      </div>
+
+      <div class="time">
+        8:30 PM
+      </div>
+
+      <div class="location">
+        Memorial Hall OTR
+      </div>
+
+      <div class="event-name">
+        Candlelight Halloween Concert
+      </div>
+
+    </div>
+
+
+    <!-- SATURDAY -->
+
+    <div class="event">
+
+      <div class="day">
+        Saturday
+      </div>
+
+      <div class="date">
+        October 24th
+      </div>
+
+      <div class="time">
+        5:30 PM
+      </div>
+
+      <div class="location">
+        Krueger's Tavern
+      </div>
+
+      <div class="event-name">
+        Cincinnati Scavenger Hunt
+      </div>
+
+      <a
+        class="roam-button"
+        href="https://www.letsroam.com/scavenger_hunt_app?type=app_game_lobby&app_redirect=1&join_code=fcc1f03"
+        target="_blank">
+        BEGIN THE ADVENTURE →
+      </a>
+
+    </div>
+
+
+    <!-- CLOSING -->
+
+    <div class="closing">
+
+      <div class="heart">
+        ❤️
+      </div>
+
+      Two nights. Two adventures.<br>
+      One weekend together.
+
+      <br><br>
+
+      Comfortable shoes recommended.
+
+      <br><br>
+
+      Happy Halloween, beautiful.
+
+    </div>
+
+  </div>
+
+
+  <!-- MUSIC -->
 
   <audio id="music">
     <source src="Fever.mp3" type="audio/mpeg">
   </audio>
 
+  <div class="music-note" id="musicNote">
+    ♪
+  </div>
+
+
   <script>
+
+    const readyButton = document.getElementById("readyButton");
+    const readyScreen = document.getElementById("readyScreen");
+    const reveal = document.getElementById("reveal");
     const music = document.getElementById("music");
-    const button = document.getElementById("playButton");
-    const status = document.getElementById("status");
+    const musicNote = document.getElementById("musicNote");
 
-    button.addEventListener("click", function() {
+    readyButton.addEventListener("click", function() {
 
-      if (music.paused) {
-        music.play();
+      // Start the music
+      music.play();
 
-        button.textContent = "❚❚ PAUSE";
-        status.textContent = "♪";
+      // Fade out the READY screen
+      readyScreen.style.transition = "opacity 1.5s ease";
+      readyScreen.style.opacity = "0";
 
-      } else {
-        music.pause();
+      // Reveal the surprise
+      setTimeout(function() {
 
-        button.textContent = "▶ PLAY";
-        status.textContent = "Press play when you're ready.";
-      }
+        readyScreen.style.display = "none";
+        reveal.classList.add("show");
 
+      }, 1500);
+
+      musicNote.textContent = "♪ Fever";
     });
+
   </script>
 
 </body>
